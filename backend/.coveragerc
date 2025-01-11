@@ -2,6 +2,9 @@
 omit =
     */tests/*
     */migrations/*
+    */settings.py
+    */asgi.py
+    */wsgi.py
 
 [report]
 exclude_lines =

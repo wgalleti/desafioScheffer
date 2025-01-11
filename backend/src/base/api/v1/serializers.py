@@ -10,6 +10,12 @@ class FazendaSerializerV1(serializers.ModelSerializer):
 
 
 class AlgodoeiraSerializerV1(serializers.ModelSerializer):
+
+    producao = serializers.IntegerField(
+        required=True,
+        min_value=1,
+    )
+
     class Meta:
         model = Algodoeira
         fields = "__all__"
@@ -62,5 +68,5 @@ class JWTSerializerV1(serializers.Serializer):
         return str(obj.get("access"))
 
     def get_user(self, obj):
-        user_data = TokenFSJUserSerializerV1(obj["user"], context=self.context).data
+        user_data = TokenUserSerializerV1(obj["user"], context=self.context).data
         return user_data
