@@ -16,6 +16,7 @@ class UserViewSetV1(viewsets.ModelViewSet):
 class AlgodoeiraViewSetV1(viewsets.ModelViewSet):
     queryset = Algodoeira.objects.all()
     serializer_class = AlgodoeiraSerializerV1
+    search_fields = ("nome",)
 
 
 class FazendaViewSetV1(viewsets.ModelViewSet):
