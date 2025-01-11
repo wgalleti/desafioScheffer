@@ -49,7 +49,7 @@ class UserSerializerV1(serializers.ModelSerializer):
         return instance
 
 
-class TokenFSJUserSerializerV1(UserSerializerV1):
+class TokenUserSerializerV1(UserSerializerV1):
     class Meta(UserSerializerV1.Meta):
         model = User
 

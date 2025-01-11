@@ -1,6 +1,6 @@
 from rest_framework import routers
 
-from src.base.api.v1.views import AlgodoeiraViewSetV1, FazendaViewSetV1, UserViewSetV1
+from src.base.api.v1.views import UserViewSetV1, AlgodoeiraViewSetV1, FazendaViewSetV1
 
 router = routers.DefaultRouter()
 router.register(r"v1/users", UserViewSetV1)
