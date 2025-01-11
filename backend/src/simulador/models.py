@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from src.base.mixins import MixinModelCreatedData, MixinModelUUID
@@ -30,6 +31,10 @@ class Cenario(MixinModelUUID, MixinModelCreatedData):
     @property
     def rolinhos(self):
         return sum(self.operacoes.all().values_list("rolinhos", flat=True))
+
+    @property
+    def total_fardos(self):
+        return sum(self.operacoes.all().values_list("total_fardos", flat=True))
 
     class Meta:
         verbose_name = "cenario"
@@ -77,9 +82,14 @@ class CenarioOperacao(MixinModelUUID, MixinModelCreatedData):
         *args,
         **kwargs,
     ):
+        if self.fardoes + self.rolinhos == 0:
+            raise ValidationError(
+                "É necessário informa uma quantidade de fardos ou rolinhos"
+            )
+
         self.total_fardos = (
             self.fardoes * CenarioOperacao.Producao.FARDAO
             + self.rolinhos * CenarioOperacao.Producao.ROLINHO
         )
-        self.dias = self.total_fardos / self.algodoeira.producao
+        self.dias = round(self.total_fardos / self.algodoeira.producao)
         super().save(*args, **kwargs)

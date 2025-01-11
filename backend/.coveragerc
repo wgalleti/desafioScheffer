@@ -1,0 +1,9 @@
+[run]
+omit =
+    */tests/*
+    */migrations/*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __str__
