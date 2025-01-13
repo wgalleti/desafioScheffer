@@ -3,6 +3,8 @@ import { computed, onMounted } from 'vue'
 import { algodoeiraStore } from '@/stores/algodoeira.js'
 import { fazendaStore } from '@/stores/fazenda.js'
 import Cenario from '@/components/Cenario.vue'
+import CenarioToolbar from '@/components/CenarioToolbar.vue'
+import CenarioForm from '@/components/CenarioForm.vue'
 import { cenarioStore } from '@/stores/cenario.js'
 
 const useAlgodoeira = algodoeiraStore()
@@ -54,6 +56,7 @@ onMounted(() => {
       </ul>
     </div>
     <div class="col-span-10 border rounded-lg p-2">
+      <CenarioToolbar />
       <Cenario :cenarios="cenarios" />
     </div>
   </main>

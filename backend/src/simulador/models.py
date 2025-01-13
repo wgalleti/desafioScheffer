@@ -92,4 +92,7 @@ class CenarioOperacao(MixinModelUUID, MixinModelCreatedData):
             + self.rolinhos * CenarioOperacao.Producao.ROLINHO
         )
         self.dias = round(self.total_fardos / self.algodoeira.producao)
+
+        if self.dias == 0:
+            self.dias = 1
         super().save(*args, **kwargs)

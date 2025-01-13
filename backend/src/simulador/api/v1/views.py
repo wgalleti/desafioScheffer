@@ -8,7 +8,7 @@ from src.simulador.models import Cenario, CenarioOperacao
 
 
 class CenarioViewSetV1(ModelViewSet):
-    queryset = Cenario.objects.all()
+    queryset = Cenario.objects.all().order_by("-created_at")
     serializer_class = CenarioSerializerV1
 
 
