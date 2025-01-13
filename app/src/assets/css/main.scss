@@ -1,0 +1,24 @@
+@import 'primeicons/primeicons.css';
+
+@layer tailwind-base, primevue, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+@layer primevue {
+  :root {
+    //--p-floatlabel-on-active-background: transparent !important;
+    //--p-menubar-background: var(--p-primary-color) !important;
+    //--p-menubar-border-color: var(--p-primary-color) !important;
+    --p-menubar-border-radius: none !important;
+    //--p-menubar-color: var(--p-primary-50) !important;
+    //--p-menubar-item-focus-background: var(--p-primary-800) !important;
+    //--p-menubar-item-color: var(--p-primary-50) !important;
+  }
+}
