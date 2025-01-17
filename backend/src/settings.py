@@ -46,6 +46,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -92,10 +93,11 @@ USE_TZ = config("USE_TZ", default="True", cast=bool)
 STATIC_PATH = config("STATIC_PATH", default="static")
 MEDIA_PATH = config("MEDIA_PATH", default="media")
 
-STATIC_URL = f"/{STATIC_PATH}/"
-STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)  # type: ignore
+STATIC_URL = f"/api/{STATIC_PATH}/"
+# STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)  # type: ignore
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = f"/{MEDIA_PATH}/"
+MEDIA_URL = f"/api/{MEDIA_PATH}/"
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_PATH)  # type: ignore
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -145,3 +147,10 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}

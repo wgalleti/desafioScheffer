@@ -19,6 +19,7 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "pytest-cov>=6.0.0",
     "python-decouple>=3.8",
+    "whitenoise>=6.8.2",
 ]
 
 [dependency-groups]

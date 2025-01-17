@@ -8,6 +8,7 @@ services:
       POSTGRES_DB: desafio
     ports:
       - "5432:5432"
+
   api:
     build:
       context: ./backend
@@ -23,22 +24,21 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
-      - static:/app/static/
-      - media:/app/media/
     restart: unless-stopped
-  app:
+
+  web:
     build:
-      context: ./app
+      context: ./web
       dockerfile: Dockerfile
-    restart: unless-stopped
-    hostname: app
-    env_file:
-      - ./app/.env
+    container_name: web
     ports:
-      - "3000:80"
-    volumes:
-      - static:/usr/share/nginx/html/static/
-      - media:/usr/share/nginx/html/media/
+      - "3000:3000"
+    env_file:
+      - ./web/.env
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+
   proxy:
     image: jc21/nginx-proxy-manager:latest
     restart: unless-stopped
@@ -52,10 +52,9 @@ services:
       - "81:81"
       - "443:443"
     volumes:
+      - ./nginx/:/data/nginx/custom/
       - proxy_db:/data
       - letsencrypt:/etc/letsencrypt
 volumes:
-  static:
-  media:
   proxy_db:
   letsencrypt:

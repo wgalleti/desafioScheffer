@@ -40,7 +40,6 @@ export const authStore = defineStore(
         isLoggedIn.value = true;
       } catch (e) {
         localStorage.clear();
-        console.error(e);
         throw e;
       } finally {
         loading.value = false;

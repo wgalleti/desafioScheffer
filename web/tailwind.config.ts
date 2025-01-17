@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import twPrimeUI from "tailwindcss-primeui";
 
 export default <Partial<Config>>{
   theme: {
@@ -10,4 +11,5 @@ export default <Partial<Config>>{
       },
     },
   },
+  plugins: [twPrimeUI],
 };
