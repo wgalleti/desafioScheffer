@@ -1,12 +1,11 @@
 import axios from "axios";
-
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
 
-  const defaultUrl = config.public.apiBaseUrl;
+  const defaultUrl = String(config.public.apiBaseUrl);
 
   const api = axios.create({
-    baseURL: defaultUrl || "http://localhost:8000/api",
+    baseURL: defaultUrl,
   });
 
   api.interceptors.request.use((config) => {

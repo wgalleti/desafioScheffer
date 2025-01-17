@@ -1,17 +1,21 @@
 import { defineStore } from "pinia";
 import { useNuxtApp, useRouter } from "#app";
 
-import type { iAuthCredenciais, iAuthResponse } from "~/types/stores/auth";
-import { AppStore } from "~/stores/app";
+import type {
+  iAuthCredenciais,
+  iAuthResponse,
+  iAuthUser,
+} from "~/types/stores/auth";
+import { appStore } from "~/stores/app";
 
-export const AuthStore = defineStore(
+export const authStore = defineStore(
   "auth",
   () => {
     const { $api } = useNuxtApp();
 
-    const useApp = AppStore();
+    const useApp = appStore();
 
-    const user = ref<string | null>(null);
+    const user = ref<iAuthUser | null>(null);
     const token = ref<string | null>(null);
     const isLoggedIn = ref<boolean>(false);
     const loading = ref<boolean>(false);
@@ -25,18 +29,19 @@ export const AuthStore = defineStore(
           password,
         });
 
-        const { token: authToken } = data;
+        const { token: authToken, user: userData } = data;
 
         if (!token) {
           throw new Error("Token inválido");
         }
 
-        user.value = username;
+        user.value = userData;
         token.value = authToken;
         isLoggedIn.value = true;
       } catch (e) {
         localStorage.clear();
         console.error(e);
+        throw e;
       } finally {
         loading.value = false;
       }
@@ -57,7 +62,7 @@ export const AuthStore = defineStore(
     const check = async () => {
       try {
         useApp.showLoading("Verificando login...");
-        const { data } = await $api.get<iAuthResponse>("auth/user/");
+        const { data } = await $api.get<iAuthUser>("auth/user/");
         user.value = data;
         isLoggedIn.value = true;
       } catch (e) {

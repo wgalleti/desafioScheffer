@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: postgres
@@ -10,3 +8,54 @@ services:
       POSTGRES_DB: desafio
     ports:
       - "5432:5432"
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: >
+      sh -c "uv run manage.py migrate && uv run gunicorn src.wsgi --bind 0.0.0.0:8000 -t 120 -w 4"
+    hostname: api
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - static:/app/static/
+      - media:/app/media/
+    restart: unless-stopped
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    hostname: app
+    env_file:
+      - ./app/.env
+    ports:
+      - "3000:80"
+    volumes:
+      - static:/usr/share/nginx/html/static/
+      - media:/usr/share/nginx/html/media/
+  proxy:
+    image: jc21/nginx-proxy-manager:latest
+    restart: unless-stopped
+    hostname: proxy
+    environment:
+      DISABLE_IPV6: true
+      INITIAL_ADMIN_EMAIL: admin@admin.com
+      INITIAL_ADMIN_PASSWORD: senha@123
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - proxy_db:/data
+      - letsencrypt:/etc/letsencrypt
+volumes:
+  static:
+  media:
+  proxy_db:
+  letsencrypt:

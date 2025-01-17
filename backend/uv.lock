@@ -24,6 +24,8 @@ dependencies = [
     { name = "django-unfold" },
     { name = "djangorestframework" },
     { name = "djangorestframework-simplejwt" },
+    { name = "gunicorn" },
+    { name = "pre-commit" },
     { name = "psycopg2-binary" },
     { name = "pytest-cov" },
     { name = "python-decouple" },
@@ -49,6 +51,8 @@ requires-dist = [
     { name = "django-unfold", specifier = ">=0.44.0" },
     { name = "djangorestframework", specifier = ">=3.15.2" },
     { name = "djangorestframework-simplejwt", specifier = ">=5.4.0" },
+    { name = "gunicorn", specifier = ">=23.0.0" },
+    { name = "pre-commit", specifier = ">=4.0.1" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },
     { name = "pytest-cov", specifier = ">=6.0.0" },
     { name = "python-decouple", specifier = ">=3.8" },
@@ -283,6 +287,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/9d/db/3ef5bb276dae18d6ec2124224403d1d67bccdbefc17af4cc8f553e341ab1/filelock-3.16.1.tar.gz", hash = "sha256:c249fbfcd5db47e5e2d6d62198e565475ee65e4831e2561c8e313fa7eb961435", size = 18037 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b9/f8/feced7779d755758a52d1f6635d990b8d98dc0a29fa568bbe0625f18fdf3/filelock-3.16.1-py3-none-any.whl", hash = "sha256:2082e5703d51fbf98ea75855d9d5527e33d8ff23099bec374a134febee6946b0", size = 16163 },
+]
+
+[[package]]
+name = "gunicorn"
+version = "23.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/34/72/9614c465dc206155d93eff0ca20d42e1e35afc533971379482de953521a4/gunicorn-23.0.0.tar.gz", hash = "sha256:f014447a0101dc57e294f6c18ca6b40227a4c90e9bdb586042628030cba004ec", size = 375031 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cb/7d/6dac2a6e1eba33ee43f318edbed4ff29151a49b5d37f080aad1e6469bca4/gunicorn-23.0.0-py3-none-any.whl", hash = "sha256:ec400d38950de4dfd418cff8328b2c8faed0edb0d517d3394e457c317908ca4d", size = 85029 },
 ]
 
 [[package]]

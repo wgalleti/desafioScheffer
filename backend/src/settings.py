@@ -75,7 +75,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "src.wsgi.application"
 
 DATABASES = {
-    "default": db_url("postgresql://desafio:desafio@localhost:5432/desafio"),
+    "default": db_url("postgresql://desafio:desafio@db:5432/desafio"),
 }
 
 AUTH_PASSWORD_VALIDATORS = []

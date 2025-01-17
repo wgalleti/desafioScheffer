@@ -1,9 +1,7 @@
-import { defineStore } from "pinia";
-
-export const AppStore = defineStore(
+export const appStore = defineStore(
   "app",
   () => {
-    const appVersion = ref<string>("1.0.0");
+    const currentVersion = ref<string>("1.0");
     const loading = ref<boolean>(false);
     const loadingText = ref<string | null>(null);
 
@@ -16,14 +14,19 @@ export const AppStore = defineStore(
       loadingText.value = null;
     };
 
+    // LAYOUT
+    const sideMenu = ref<boolean>(false);
+
     return {
-      appVersion,
+      currentVersion,
       loading,
+      loadingText,
       showLoading,
       closeLoading,
+      sideMenu,
     };
   },
   {
     persist: true,
-  }
+  },
 );
